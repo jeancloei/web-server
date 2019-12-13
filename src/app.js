@@ -6,8 +6,8 @@ const app = express()
 
 //Defined paths for express config
 const publicDirectoryPath = path.join(__dirname, '../public') 
-const viewsPath = path.join(__dirname, '../templates/views')
-const partialsPath = path.join(__dirname, '../templates/partials')
+const viewsPath           = path.join(__dirname, '../templates/views')
+const partialsPath        = path.join(__dirname, '../templates/partials')
 
 //setup handlebars engine and views location
 app.set('view engine', 'hbs')
@@ -43,6 +43,22 @@ app.get('/weather', (req, res) => {
   res.send({
     forcast:"It is claudy",
     location:'Miami, FL'
+  })
+})
+
+app.get('/help/*', (req,res) => {
+  res.render('404', {
+    title:'404',
+    name: 'Jean De Castro',
+    errorMessage: 'Help article not found.'
+  })
+}) 
+
+app.get('*', (req, res) => {
+  res.render('404', {
+    title:'404',
+    name: 'Jean De Castro',
+    errorMessage: 'Page not found.'
   })
 })
 
